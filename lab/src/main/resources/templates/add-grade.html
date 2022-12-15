@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add grade</title>
+    <style>
+        form{
+            margin-left: 15px;
+        }
+        .component{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add grade to a student</h1>
+    <form th:method="POST" th:action="@{/grades/add}">
+        <div class="component">
+            <label for="selected-student">Select student:</label>
+            <select name="selectedUsername" id="selected-student">
+                <option th:each="student : ${students}"
+                        th:text="${student.getName()} + ' ' + ${student.getSurname()}"
+                        th:value="${student.getUsername()}">
+
+                </option>
+            </select>
+        </div>
+
+        <div class="component">
+            <label for="grade">Choose grade:</label>
+            <select name="grade" id="grade">
+                <option value='A'>A</option>
+                <option value='B'>B</option>
+                <option value='C'>C</option>
+                <option value='D'>D</option>
+                <option value='E'>E</option>
+                <option value='F'>F</option>
+            </select>
+        </div>
+
+        <div class="component">
+            <label for="date-pick">Pick a date:</label>
+            <input type="datetime-local" id="date-pick" name="timestamp">
+        </div>
+
+        <input type="submit" name="Submit">
+    </form>
+</body>
+</html>

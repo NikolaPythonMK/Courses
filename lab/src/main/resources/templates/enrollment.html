@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enrollment</title>
+</head>
+<body>
+    <div>
+        <form th:method="GET" th:action="@{/enrollment}">
+            <label for="search">Search</label>
+            <input type="text" name="part" id="search" placeholder="Search students or courses">
+            <input type="submit" value="Search">
+        </form>
+
+        <div>
+            <h2>Courses:</h2>
+            <div th:each="course : ${courses}">
+                <p th:text="${course.getName()}"></p>
+            </div>
+            <h2>Students:</h2>
+            <div th:each="student : ${students}">
+                <p th:text="${student.getName()} + ' ' + ${student.getSurname()}"></p>
+            </div>
+        </div>
+    </div>
+
+    <a href="/courses">Back</a>
+</body>
+</html>

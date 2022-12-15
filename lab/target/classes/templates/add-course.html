@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Course</title>
+    <style>
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form th:method="POST" th:action="@{/courses/add}">
+            <div th:if="${course != null}">
+                <input type="hidden" name="id" th:value="${course.getId()}">
+            </div>
+
+            <div>
+                <label for="name">Course name</label>
+                <input type="text" name="name"
+                                    id="name"
+                                    required
+                                    th:value="${course != null} ? ${course.getName()} : ''">
+            </div>
+
+            <div>
+                <label for="name">Course description</label>
+                <input type="text" name="desc"
+                       id="desc"
+                       required
+                       th:value="${course != null} ? ${course.getDescription()} : ''">
+            </div>
+
+            <div>
+                <select name="teacherId">
+                    <option th:if="${course == null}"}
+                            th:each="teacher : ${teachers}"
+                            th:text="${teacher.getFullName().getName()} + ' ' + ${teacher.getFullName().getSurname()}"
+                            th:value="${teacher.getId()}">
+
+                    </option>
+
+                    <option th:if="${course != null}"}
+                            th:each="teacher : ${teachers}"
+                            th:selected="${course.getId() != null && course.getTeacher().getId() == teacher.getId()}"
+                            th:text="${teacher.getFullName().getName()} + ' ' + ${teacher.getFullName().getSurname()}"
+                            th:value="${teacher.getId()}">
+
+                    </option>
+                </select>
+            </div>
+            <button><a href="/courses">Back</a></button>
+            <input type="submit" value="Submit">
+        </form>
+
+    </div>
+</body>
+</html>

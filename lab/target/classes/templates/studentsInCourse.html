@@ -1,0 +1,31 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>WP lab - Students in Course</title>
+
+</head>
+<body>
+<header>
+    <h1>Students in Course</h1>
+</header>
+<section>
+    <div><th:block th:text="${course.getName()}"></th:block></div>
+    <ul>
+        <li th:each="student : ${students}">
+            <th:block th:text="${student.getName()} + ' ' + ${student.getSurname()} + ' (' + ${student.getUsername()} + ')'"></th:block>
+        </li>
+    </ul>
+
+    <div>
+        <h4>Graded students</h4>
+        <ul>
+            <li th:each="grade : ${graded}"
+                th:text="${grade.getStudent().getName()} + ' ' + ${grade.getStudent().getSurname()} + ' ' + ${grade.getGrade()} + ' '  + ${#temporals.format(grade.getTimestamp(), 'dd-MM-yyyy HH:mm:ss')}"></li>
+        </ul>
+    </div>
+    <a href="/grades">Add Grade</a><br><br>
+    <a href="/AddStudent">Back</a>
+</section>
+
+</body>
+</html>
